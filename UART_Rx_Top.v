@@ -1,7 +1,7 @@
 module UART_top #(parameter data_size=8,
 parameter parity_on=1, 
 parameter even_parity=1,
-parameter no_of_samples=8,
+parameter no_of_samples=16,
 parameter BAUD_RATE=1000,
 parameter SYS_CLK_FREQ=no_of_samples*1000)(input sys_clk,
 input rst,
