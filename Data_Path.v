@@ -74,16 +74,20 @@ output [data_size-1 : 0] Rx_out
 	);
 	 
 	 // detects data error (in case parity is used)
-	 if(parity_on) begin
-			flag_reg data_err_flag (
-			.clk(clk), 
-			.hard_rst(rst),
-			.soft_rst(data_flag_rst),
-			.w_en(data_err_en), 
-			.data_in(data_err_in), 
-			.data_out(data_error)
-			);
-	 end
+	 generate 
+	 begin
+		 if(parity_on) begin
+				flag_reg data_err_flag (
+				.clk(clk), 
+				.hard_rst(rst),
+				.soft_rst(data_flag_rst),
+				.w_en(data_err_en), 
+				.data_in(data_err_in), 
+				.data_out(data_error)
+				);
+		 end
+	end
+	endgenerate
 
 
 endmodule

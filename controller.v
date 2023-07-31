@@ -27,12 +27,15 @@ output reg frame_done
 	 
 	 `ifdef P_on
 		wire parity = even_parity? ^Rx_reg : !(^Rx_reg) ;
-		parameter state_reg_width = 'd3;
+		localparam state_reg_width = 'd3;
+		//state encoding -- (gray coding)
+		localparam [state_reg_width-1 : 0] idle='b000, start='b001, Read='b011, parity_ckeck='b010,stop='b110;
 	 `else
-		parameter state_reg_width = 'd2;
+		localparam state_reg_width = 'd2;
+		//state encoding -- (gray coding)
+		localparam [state_reg_width-1 : 0] idle='b00, start='b01, Read='b11,stop='b10;		
 	`endif
 	 
-	 parameter [state_reg_width-1 : 0] idle='d0, start='d1, Read='d2, parity_ckeck='d4,stop='d3;
 	 reg [state_reg_width-1 : 0] next_state, state ;
 	
    //////////////////////// state register /////////////////
